@@ -3,6 +3,8 @@ from django.http import HttpResponse,HttpResponseRedirect
 from website.forms import ContactForm,NewsLetterForm
 from django.contrib import messages
 from website.models import Contact
+from django.template import Context, loader
+
 
 def index(request):
     return render(request,'index.html')
@@ -34,3 +36,11 @@ def news_letter(request):
         if form.is_valid():
             form.save()
     return HttpResponseRedirect('/')
+
+
+
+def handler404(request, exception, template_name="404.html"):
+    return render(request,'404.html',status=404)
+
+def handler500(request,*args, **argv):
+    return render(request,'500.html',status=500)

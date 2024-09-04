@@ -1,3 +1,5 @@
 /myenv/
 **/__pycache__/
 Django-4.2.14-py3-none-any.whl
+.env
+static/*

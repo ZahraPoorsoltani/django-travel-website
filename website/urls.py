@@ -21,6 +21,9 @@ from django.contrib.sitemaps.views import sitemap
 from  website.sitemaps import WebsiteStaticSitemap
 from blog.sitemaps import BlogSitemap
 from django.urls import include
+from django.urls import re_path
+from django.views.generic import TemplateView
+
 
 app_name = 'website'
 sitemaps = {
@@ -45,3 +48,6 @@ urlpatterns = [
 urlpatterns += [
     path('captcha/', include('captcha.urls')),
 ]
+
+# urlpatterns.insert(0, re_path(r'^', TemplateView.as_view(template_name='commingsoon.html'), name='maintenance'))
+

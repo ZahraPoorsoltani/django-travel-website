@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'blog.apps.BlogConfig',
     'accounts',
+    'compressor',
+
 
 
     ]
@@ -135,8 +137,18 @@ AUTHENTICATION_BACKENDS = ['accounts.utils.CustomBackend']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_PORT = config('EMAIL_PORT',cast = int)
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER =  'zahrapoorsoltani7@gmail.com'
-EMAIL_HOST_PASSWORD = 'teduqtaincopvbct'
+EMAIL_HOST_USER =  config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+
+
+#django-compressor 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
